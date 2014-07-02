@@ -30,11 +30,16 @@ inline bool lt(const real_t &a, const real_t &b) {
 struct Vec {
     real_t x, y, z;
     Vec(real_t _x = 0, real_t _y = 0, real_t _z = 0): x(_x), y(_y), z(_z) {}
-
+    Vec(const Vec &v): x(v.x), y(v.y), z(v.z) {}
+    
     inline Vec operator - () {
         return Vec(-x, -y, -z);
     }
     
+    inline Vec& operator = (const Vec &b) {
+        x = b.x, y = b.y, z = b.z;
+        return *this;
+    } 
 
     inline Vec operator + (const Vec &b) const { 
         return Vec(x + b.x, y + b.y, z + b.z); 
@@ -89,7 +94,10 @@ struct Vec {
         return sqrt(x * x + y * y + z * z);
     }
     inline Vec& norm() {
-        return *this /= length();
+        register real_t l2 = length2();
+        if (eq(l2, 0))
+            return *this;
+        return *this /= sqrt(l2);
     }
 
 };

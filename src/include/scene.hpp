@@ -9,7 +9,8 @@
 class Scene
 {
 public:
-    Scene &add_object(Item* item);
+    ~Scene();
+    Scene &add_item(Item* item);
 
     std::vector< Item* > items;
     std::vector< Item* > emissive_items;

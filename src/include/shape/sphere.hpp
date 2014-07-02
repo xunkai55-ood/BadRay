@@ -6,8 +6,7 @@
 class Sphere : public Shape
 {
 public:
-    Sphere(const Point &_o, real_t _radius) : o(_o), radius(_radius) {}
-    Point o;
+    Sphere(const Point &_o, real_t _radius) : radius(_radius), Shape(_o) {}
     real_t radius;
 
     ShapeIntersectInfo intersect(Ray r);

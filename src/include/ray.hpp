@@ -7,11 +7,12 @@ class Ray {
 public:
     Point s;
     Vec d;
-    real_t energy;
-    Ray(const Point &_s, const Vec &_d, real_t _energy = 1.0) : s(_s), d(_d), energy(_energy) {
+    real_t power;
+    Ray(const Point &_s, const Vec &_d, real_t _power = 1.0) : s(_s), d(_d), power(_power) {
         if (neq(d.length(), 1.0))
             d.norm();
     }
+    Ray(const Ray &r): s(r.s), d(r.d), power(r.power) {}
 };
 
 #endif
