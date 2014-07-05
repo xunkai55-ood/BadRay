@@ -5,7 +5,7 @@
 
 class EmissiveSurface : public Surface {
 public:
-    EmissiveSurface() : Surface() {}
+    EmissiveSurface() : Surface(0, 0, 0, 0.05, 0) {}
     inline bool is_emissive() {
         return true;
     }

@@ -12,7 +12,7 @@ struct ShapeIntersectInfo
         t = s.t, n = s.n, ok = s.ok, inner = s.inner;
     }
     ShapeIntersectInfo(real_t _t, Vec _n, bool _i): t(_t), n(_n), ok(true), inner(_i) {}
-    ShapeIntersectInfo(bool ok): ok(false) {}
+    ShapeIntersectInfo(): ok(false) {}
     real_t t;
     Vec n;
     bool ok;

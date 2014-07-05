@@ -25,24 +25,79 @@ int main(int argc, char **argv)
     // TEST: a single emissive ball in the space
 
     Scene scene;
-    scene.add_item(new Item(
-        new Sphere(Point(0, 100, 30), 15),
-        new UniformlyEmissiveSurface(1.0),
+    scene.add_item(new Item(1,
+        new Sphere(Point(-1e5 - 30, 0, 0), 1e5),
+        surface::SolidRough(),
+        new Monocolor(Intensity(0.75, 0.25, 0.25))
+    ));
+
+    scene.add_item(new Item(2,
+        new Sphere(Point(-1e5 + 30, 0, 0), 1e5),
+        surface::SolidRough(),
+        new Monocolor(Intensity(0.25, 0.25, 0.75))
+    ));
+
+    scene.add_item(new Item(3,
+        new Sphere(Point(0, 30, 1e5 + 30), 1e5),
+        surface::SolidRough(),
+        new Monocolor(Intensity(0.6, 0.8, 0.25))
+    ));
+
+    scene.add_item(new Item(4,
+        new Sphere(Point(0, 30, -1e5 - 30), 1e5),
+        surface::SolidRough(),
+        new ChessBoard(10)
+    ));
+
+    scene.add_item(new Item(5,
+        new Sphere(Point(0, 1e5 + 50, 0), 1e5),
+        surface::SolidRough(),
+        new Monocolor(Intensity(0.75, 0.75, 0.75))
+    ));
+
+    scene.add_item(new Item(6,
+        new Sphere(Point(0, -1e5 - 22, 0), 1e5),
+        surface::SolidRough(),
+        new Monocolor(Intensity(0, 0, 0))
+    ));
+
+    scene.add_item(new Item(7,
+        new Sphere(Point(0, 20, 630 - 0.1), 600),
+        surface::Light(12, 12, 12),
         new Monocolor(Intensity(1, 1, 1))
     ));
 
+    scene.add_item(new Item(8,
+        new Sphere(Point(15, 30, 12 - 22), 12),
+        surface::Mirror(),
+        new Monocolor(Intensity(0.9, 0.9, 0.9))
+    ));
+
+    scene.add_item(new Item(8,
+        new Sphere(Point(-10, 25, 8 - 22), 8),
+        surface::Glass(),
+        new Monocolor(Intensity(0.9, 0.9, 0.9))
+    ));
+
+
+    scene.add_item(new Item(8,
+        new Sphere(Point(0, 18, -22 - 3), 5),
+        surface::SolidRough(),
+        new Monocolor(Intensity(0.8, 0.6, 0.25))
+    ));
+
     Camera camera(
-        Point(0, 0, 0), // center
-        Vec(0, 1.2, 0), // deep-dir vector
+        Point(0, -20, 0), // center
+        Vec(0, 1.8, 0), // deep-dir vector
         Vec(2, 0, 0),   // 1/2 right
         Vec(0, 0, 1.5), // 1/2 up
         800, 600        // pixel
-    ); 
+    );
 
     Tracer tracer(
         &camera,
         &scene,
-        100 // samples count
+        30 // samples count
     );
 
     PPMRenderer renderer(

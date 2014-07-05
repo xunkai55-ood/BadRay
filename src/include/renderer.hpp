@@ -26,12 +26,12 @@ public:
         Intensity *map = new Intensity[w * h];
         tracer->paint(map);
         for (int i = 0; i < w * h; i++)
-            fprintf(f, "%d %d %d ", scale(map[i].r), scale(map[i].g), scale(map[i].b));
+            fprintf(f, "%d %d %d ", clamp(map[i].r), clamp(map[i].g), clamp(map[i].b));
         delete map;
     }
 
-    inline int scale(intensity_t x) {
-        return (int)(x * 255);
+    inline int clamp(intensity_t x) {
+        return (int)((x > 1 ? 1 : x) * 255);
     }
 };
 

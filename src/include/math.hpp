@@ -2,8 +2,13 @@
 #define BADRAY_MATH_HPP
 
 #include <cmath>
+#include <cassert>
 
 typedef double real_t;
+
+inline real_t real_abs(real_t a) {
+    return a > 0 ? a : -a;
+}
 
 const real_t EPS = 1e-6;
 

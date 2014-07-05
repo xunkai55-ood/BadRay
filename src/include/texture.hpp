@@ -3,5 +3,6 @@
 
 #include "texture/texture.hpp"
 #include "texture/monocolor.hpp"
+#include "texture/chessboard.hpp"
 
 #endif

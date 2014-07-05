@@ -6,7 +6,7 @@ set(SRC_LIST
     scene.cpp
     tracer.cpp
     shape/sphere.cpp
-    surface/regular_surface.cpp
+    surface/surface.cpp
 )
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)

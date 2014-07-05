@@ -5,19 +5,23 @@
 
 class UniformlyEmissiveSurface : public EmissiveSurface {
 public:
-    UniformlyEmissiveSurface(real_t _luminance) : EmissiveSurface() {
-        if (_luminance > 1)
-            luminance = 1.0;
-        else if (_luminance < 0)
-            luminance = 0;
-        else
-            luminance = _luminance;
+    UniformlyEmissiveSurface(Intensity _luminance) : EmissiveSurface() {
+        luminance = _luminance;
     }
-    real_t luminance;
-    real_t get_emission(const Point &p) {
+    Intensity luminance;
+    Intensity get_emission(const Point &p) {
         return luminance;
     }
 };
+
+namespace surface {
+    inline Surface *Light(Intensity _luminance) {
+        return new UniformlyEmissiveSurface(_luminance);
+    }
+    inline Surface *Light(intensity_t r, intensity_t g, intensity_t b) {
+        return new UniformlyEmissiveSurface(Intensity(r, g, b));
+    }
+}
 
 
 #endif

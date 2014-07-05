@@ -10,12 +10,25 @@ struct Intensity {
     Intensity(const Intensity &i): r(i.r), g(i.g), b(i.b) {}
 
     Intensity& operator += (const Intensity &i) {
-        r += i.r, g += i.g, b += i.b;
+        r += i.r; g += i.g; b += i.b;
         return *this;
     }
+    Intensity operator + (const Intensity &i) {
+        return Intensity(r + i.r, g + i.g, b + i.b);
+    }
     Intensity& operator *= (real_t t) {
-        r *= t, g *= t, b *= t;
+        r *= t; g *= t; b *= t;
         return *this;
+    }
+    Intensity& operator *= (const Intensity &i) {
+        r *= i.r; g *= i.g; b *= i.b;
+        return *this;
+    }
+    Intensity operator * (const Intensity &i) {
+        return Intensity(r * i.r, g * i.g, b * i.b);
+    }
+    Intensity clamp() {
+        return Intensity(r > 1 ? 1 : r, g > 1 ? 1 : g, b > 1 ? 1 : b);
     }
 
 #if 0
