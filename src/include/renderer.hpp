@@ -1,33 +1,28 @@
 #ifndef BADRAY_RENDERER_HPP
 #define BADRAY_RENDERER_HPP
 
-#include "tracer.hpp"
 #include <string>
 #include <cstdio>
 
 class Renderer {
 public:
-    Renderer(Tracer *_tracer, std::string _fn, int _w, int _h): tracer(_tracer), fn(_fn), w(_w), h(_h) {}
+    Renderer() {}
 
-    Tracer *tracer;
-    std::string fn;
-    int w, h;
-
-    virtual void work() = 0;
+    virtual void render(int w, int h, int id, Intensity *map) = 0;
 };
 
-class PPMRenderer : Renderer {
+class PPMRenderer : public Renderer {
 public:
-    PPMRenderer(Tracer *_tracer, std::string _fn, int _w, int _h): Renderer(_tracer, _fn, _w, _h) {}
+    PPMRenderer() {}
 
-    void work() {
-        FILE *f = fopen(fn.c_str(), "w");
+    void render(int w, int h, int id, Intensity *map) {
+        char fn[100];
+        sprintf(fn, "result%d.ppm", id);
+        FILE *f = fopen(fn, "w");
+
         fprintf(f, "P3\n%d %d\n%d\n", w, h, 255);
-        Intensity *map = new Intensity[w * h];
-        tracer->paint(map);
         for (int i = 0; i < w * h; i++)
             fprintf(f, "%d %d %d ", clamp(map[i].r), clamp(map[i].g), clamp(map[i].b));
-        delete map;
     }
 
     inline int clamp(intensity_t x) {

@@ -6,7 +6,8 @@
 typedef double intensity_t;
 
 struct Intensity {
-    Intensity(intensity_t _r = 0, intensity_t _g = 0, intensity_t _b = 0) : r(_r), g(_g), b(_b) {}
+    Intensity(): r(0), g(0), b(0) {}
+    Intensity(intensity_t _r, intensity_t _g, intensity_t _b) : r(_r), g(_g), b(_b) {}
     Intensity(const Intensity &i): r(i.r), g(i.g), b(i.b) {}
 
     Intensity& operator += (const Intensity &i) {
@@ -26,6 +27,9 @@ struct Intensity {
     }
     Intensity operator * (const Intensity &i) {
         return Intensity(r * i.r, g * i.g, b * i.b);
+    }
+    Intensity operator * (real_t t) {
+        return Intensity(r * t, g * t, b * t);
     }
     Intensity clamp() {
         return Intensity(r > 1 ? 1 : r, g > 1 ? 1 : g, b > 1 ? 1 : b);

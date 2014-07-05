@@ -49,10 +49,13 @@ namespace surface {
         return new Surface(kab, 0, 0, 1, 0);
     }
     inline Surface* Glass() {
-        return new Surface(0.01, 0, 1, 0.05, 0.05, 2);
+        return new Surface(0.01, 0, 1, 0.05, 0.05, 1.5);
     }
     inline Surface* Mirror() {
         return new Surface(0.01, 1, 0, 0.05, 0);
+    }
+    inline Surface* Metal() {
+        return new Surface(0, 0.5, 0, 0.5, 0);
     }
 }
 

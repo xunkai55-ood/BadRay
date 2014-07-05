@@ -5,9 +5,7 @@
 
 class UniformlyEmissiveSurface : public EmissiveSurface {
 public:
-    UniformlyEmissiveSurface(Intensity _luminance) : EmissiveSurface() {
-        luminance = _luminance;
-    }
+    UniformlyEmissiveSurface(Intensity _luminance) : EmissiveSurface(), luminance(_luminance) {}
     Intensity luminance;
     Intensity get_emission(const Point &p) {
         return luminance;

@@ -41,20 +41,27 @@ IntersectInfo Tracer::get_closest_intersect(Ray r) {
     return ci;
 }
 
-void Tracer::paint(Intensity *map) {
+void Tracer::paint() {
 
     // trace(camera->generate_ray(400, 300), false);
+    Intensity *map = new Intensity[camera->w * camera->h];
+    Intensity *mapcpy = new Intensity[camera->w * camera->h];
     for (int i = 0; i < camera->h; i++)
         for (int j = 0; j < camera->w; j++)
             map[i * camera->w + j] = Intensity(0, 0, 0);
-    for (int tc = 0; tc < samples; tc++) {
-        fprintf(stderr, "%d / %d\n", tc + 1, samples);
+    for (int tc = 1; tc <= samples; tc++) {
+        fprintf(stderr, "%d / %d\n", tc, samples);
         for (int i = 0; i < camera->h; i++)
             for (int j = 0; j < camera->w; j++)
                 map[i * camera->w + j] += trace(camera->generate_ray(i, j), false);
+
+        if (tc % gap == 0) {
+            real_t alpha = 1.0 / tc;
+            for (int i = 0; i < camera->h; i++)
+                for (int j = 0; j < camera->w; j++)
+                    mapcpy[i * camera->w + j] = map[i * camera->w + j] * alpha;
+            renderer->render(camera->w, camera->h, tc / gap, mapcpy);
+        }
     }
-    real_t alpha = 1.0 / samples;
-    for (int i = 0; i < camera->h; i++)
-        for (int j = 0; j < camera->w; j++)
-            map[i * camera->w +j] *= alpha;
+    delete mapcpy;
 }

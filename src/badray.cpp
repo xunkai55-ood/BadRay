@@ -68,21 +68,21 @@ int main(int argc, char **argv)
     ));
 
     scene.add_item(new Item(8,
-        new Sphere(Point(15, 30, 12 - 22), 12),
+        new Sphere(Point(15, 38, 3), 12),
         surface::Mirror(),
         new Monocolor(Intensity(0.9, 0.9, 0.9))
     ));
 
     scene.add_item(new Item(8,
-        new Sphere(Point(-10, 25, 8 - 22), 8),
+        new Sphere(Point(-11, 27, -16), 8),
         surface::Glass(),
         new Monocolor(Intensity(0.9, 0.9, 0.9))
     ));
 
 
     scene.add_item(new Item(8,
-        new Sphere(Point(0, 18, -22 - 3), 5),
-        surface::SolidRough(),
+        new Sphere(Point(0, 20, -31), 8),
+        surface::Metal(),
         new Monocolor(Intensity(0.8, 0.6, 0.25))
     ));
 
@@ -94,19 +94,17 @@ int main(int argc, char **argv)
         800, 600        // pixel
     );
 
+    Renderer *renderer = new PPMRenderer;
+
     Tracer tracer(
         &camera,
         &scene,
-        30 // samples count
+        renderer,
+        30, // samples count
+        30
     );
 
-    PPMRenderer renderer(
-        &tracer,
-        "result.ppm",
-        800, 600
-    );
-
-    renderer.work();
+    tracer.paint();
 
     return 0;
 }
