@@ -10,8 +10,8 @@ public:
     Intensity get_texture(Point &p) {
         int k1 = real_abs(p.x) / cell_a;
         if (p.x < 0) k1 = 1 - k1;
-        int k2 = real_abs(p.y) / cell_a;
-        if (p.y < 0) k2 = 1 - k2;
+        int k2 = real_abs(p.z) / cell_a;
+        if (p.z < 0) k2 = 1 - k2;
         if ((k1 + k2) % 2 == 0)
             return Intensity(0, 0, 0);
         else

@@ -39,20 +39,20 @@ int main(int argc, char **argv)
 
     scene.add_item(new Item(3,
         new Sphere(Point(0, 30, 1e5 + 30), 1e5),
-        surface::SolidRough(),
-        new Monocolor(Intensity(0.6, 0.8, 0.25))
+        surface::Light(2, 2, 2),
+        new Monocolor(Intensity(1, 1, 1))
     ));
 
     scene.add_item(new Item(4,
         new Sphere(Point(0, 30, -1e5 - 30), 1e5),
         surface::SolidRough(),
-        new ChessBoard(10)
+        new Monocolor(Intensity(0.6, 0.8, 0.2))
     ));
 
     scene.add_item(new Item(5,
         new Sphere(Point(0, 1e5 + 50, 0), 1e5),
         surface::SolidRough(),
-        new Monocolor(Intensity(0.75, 0.75, 0.75))
+        new ChessBoard(10)
     ));
 
     scene.add_item(new Item(6,
@@ -61,11 +61,11 @@ int main(int argc, char **argv)
         new Monocolor(Intensity(0, 0, 0))
     ));
 
-    scene.add_item(new Item(7,
-        new Sphere(Point(0, 20, 630 - 0.1), 600),
-        surface::Light(12, 12, 12),
-        new Monocolor(Intensity(1, 1, 1))
-    ));
+    // scene.add_item(new Item(7,
+    //     new Sphere(Point(0, 20, 630 - 0.1), 600),
+    //     surface::Light(12, 12, 12),
+    //     new Monocolor(Intensity(1, 1, 1))
+    // ));
 
     scene.add_item(new Item(8,
         new Sphere(Point(15, 38, 3), 12),
@@ -100,8 +100,8 @@ int main(int argc, char **argv)
         &camera,
         &scene,
         renderer,
-        30, // samples count
-        30
+        40000, // samples count
+        500
     );
 
     tracer.paint();
