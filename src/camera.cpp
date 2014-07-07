@@ -3,7 +3,7 @@
 
 #include <cstdio>
 
-Ray Camera::generate_ray(int i, int j) {
+Ray Camera::generate_ray(int i, int j, real_t ratio) {
 
     Vec raw = cursor + j * cell_x * right - i * cell_y * up;
     
@@ -14,7 +14,7 @@ Ray Camera::generate_ray(int i, int j) {
     // if (i == 599 && j == 799)
     //     fprintf(stderr, "%lf %lf %lf\n", raw.x, raw.y, raw.z);
     
-    raw += (rand_real() - 0.5) * cell_x * right + (rand_real() - 0.5) * cell_y * up;
+    raw += (rand_real() - 0.5) * ratio * cell_x * right + (rand_real() - 0.5) * cell_y * ratio * up;
     raw.norm();
     return Ray(o, raw);
 }

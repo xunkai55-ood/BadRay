@@ -68,7 +68,7 @@ int main(int argc, char **argv)
     // ));
 
     scene.add_item(new Item(8,
-        new Sphere(Point(15, 38, 3), 12),
+        new Sphere(Point(15, 38, 3), -12),
         surface::Mirror(),
         new Monocolor(Intensity(0.9, 0.9, 0.9))
     ));
@@ -86,6 +86,38 @@ int main(int argc, char **argv)
         new Monocolor(Intensity(0.8, 0.6, 0.25))
     ));
 
+    scene.add_item(new Item(8,
+        new Sphere(Point(-25, 0, 0), 3),
+        surface::SolidRough(),
+        new Monocolor(Intensity(0.3, 0.3, 0.3))
+    ));    
+
+    scene.add_item(new Item(8,
+        new Sphere(Point(-25, 10, 0), 3),
+        surface::SolidRough(),
+        new Monocolor(Intensity(0.3, 0.3, 0.3))
+    ));
+
+    scene.add_item(new Item(8,
+        new Sphere(Point(-25, 20, 0), 3),
+        surface::SolidRough(),
+        new Monocolor(Intensity(0.3, 0.3, 0.3))
+    ));
+
+
+    scene.add_item(new Item(8,
+        new Sphere(Point(-25, 30, 0), 3),
+        surface::SolidRough(),
+        new Monocolor(Intensity(0.3, 0.3, 0.3))
+    ));
+
+
+    scene.add_item(new Item(8,
+        new Sphere(Point(-25, 40, 0), 3),
+        surface::SolidRough(),
+        new Monocolor(Intensity(0.3, 0.3, 0.3))
+    ));
+
     Camera camera(
         Point(0, -20, 0), // center
         Vec(0, 1.8, 0), // deep-dir vector
@@ -100,8 +132,8 @@ int main(int argc, char **argv)
         &camera,
         &scene,
         renderer,
-        40000, // samples count
-        500
+        20000, // samples count
+        50
     );
 
     tracer.paint();

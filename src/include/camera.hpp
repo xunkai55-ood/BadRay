@@ -17,7 +17,7 @@ public:
         fprintf(stderr, "cell_x %lf cell_y %lf\n", cell_x, cell_y);
         cursor = dist - (w - 1) * 0.5 * cell_x * right + (h - 1) * 0.5 * up * cell_y; 
     }
-    Ray generate_ray(int x, int y);
+    Ray generate_ray(int x, int y, real_t ratio = 1);
 
     Point o;
     Vec dist, right, up, cursor;

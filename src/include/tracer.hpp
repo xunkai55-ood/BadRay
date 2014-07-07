@@ -15,7 +15,7 @@ public:
     Tracer(Camera *_c, Scene *_s, Renderer *_ren, int _r, int _g): 
         camera(_c), scene(_s), renderer(_ren), samples(_r), gap(_g) {}
     ~Tracer() {}
-    Intensity trace(Ray r, bool innner, int depth);
+    Intensity trace(Ray r, bool innner, int depth, int x, int y);
     IntersectInfo get_closest_intersect(Ray r);
     void paint();
 
